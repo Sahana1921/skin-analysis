@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare Chatbot</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+            background-image:url("https://i.pinimg.com/564x/46/bd/fa/46bdfa86dfe483a38eeea15ae0f0e648.jpg");
+            background-size:cover;
+        }
+        .chatbox {
+            width: 400px;
+            height: 500px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            background-image: url("https://i.pinimg.com/564x/ee/1b/ce/ee1bce4e72c37ce9f76596e64e36bbcc.jpg");
+            overflow-y: auto;
+            margin-bottom: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .input-box {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .bot-message, .user-message {
+            margin: 5px 0;
+        }
+        .bot-message {
+            text-align: left;
+            color: #4CAF50;
+        }
+        .user-message {
+            text-align: right;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <style>
+        
+    </style>
+
+    <div class="chatbox" id="chatbox">
+        <div id="chat-output"></div>
+    </div>
+
+    <input type="text" id="user-input" class="input-box" placeholder="Type your message...">
+    <button class="button" onclick="processInput()">Send</button>
+
+    <script>
+        const chatbox = document.getElementById('chatbox');
+        const chatOutput = document.getElementById('chat-output');
+        const userInput = document.getElementById('user-input');
+
+        // Example skincare questions and answers
+        const questionsAndAnswers = [
+            {
+                question: "What type of skin do you have?",
+                options: ["Dry", "Oily", "Combination", "Normal"],
+                responses: {
+                    "dry": "Dry skin? It's important to use moisturizers that are rich in hydration like creams with ceramides or hyaluronic acid.",
+                    "oily": "For oily skin, it's good to use oil-free and non-comedogenic products. Try to incorporate a salicylic acid cleanser.",
+                    "combination": "Combination skin requires balancing moisture in the drier areas and controlling oil in the T-zone. Look for light, non-greasy moisturizers.",
+                    "normal": "If you have normal skin, you're lucky! Maintain balance with gentle cleansers and daily moisturizers."
+                }
+            },
+            {
+                question: "Do you use sunscreen daily?",
+                options: ["Yes", "No"],
+                responses: {
+                    "yes": "Great! Sunscreen is essential to prevent premature aging and skin damage.",
+                    "no": "Try to include sunscreen in your daily routine, even indoors! It's crucial for protecting your skin from harmful UV rays."
+                }
+            },
+            {
+                question: "Are you dealing with any specific skin concerns?",
+                options: ["Acne", "Dark spots", "Wrinkles", "None"],
+                responses: {
+                    "acne": "For acne, try products with salicylic acid or benzoyl peroxide. Avoid harsh scrubs and keep your skin hydrated.",
+                    "dark spots": "Dark spots can be reduced with brightening agents like vitamin C, niacinamide, or gentle exfoliation.",
+                    "wrinkles": "To reduce wrinkles, retinoids or peptides in your skincare routine can help. Don't forget to apply sunscreen daily!",
+                    "none": "That's great! Keep following a consistent skincare routine for maintenance and prevention."
+                }
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        // Function to display a question
+        function askQuestion() {
+            const currentQuestion = questionsAndAnswers[currentQuestionIndex];
+            const botMessage = document.createElement('div');
+            botMessage.classList.add('bot-message');
+            botMessage.textContent = currentQuestion.question;
+            chatOutput.appendChild(botMessage);
+
+            // Display options if available
+            currentQuestion.options.forEach(option => {
+                const optionButton = document.createElement('button');
+                optionButton.textContent = option;
+                optionButton.onclick = () => {
+                    userInput.value = option;
+                    processInput();
+                };
+                optionButton.style.margin = '5px';
+                chatOutput.appendChild(optionButton);
+            });
+
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        // Function to process user's input
+        function processInput() {
+            const userText = userInput.value.trim().toLowerCase();
+            if (userText === "") return;
+
+            // Display user's message
+            const userMessage = document.createElement('div');
+            userMessage.classList.add('user-message');
+            userMessage.textContent = userInput.value;
+            chatOutput.appendChild(userMessage);
+            userInput.value = '';
+
+            // Check the response for the current question
+            const currentQuestion = questionsAndAnswers[currentQuestionIndex];
+            const botResponse = currentQuestion.responses[userText] || "I'm sorry, I didn't understand that.";
+            
+            const botMessage = document.createElement('div');
+            botMessage.classList.add('bot-message');
+            botMessage.textContent = botResponse;
+            chatOutput.appendChild(botMessage);
+
+            currentQuestionIndex++;
+
+            // If more questions are available, ask the next one
+            if (currentQuestionIndex < questionsAndAnswers.length) {
+                setTimeout(askQuestion, 1000);
+            } else {
+                const botFinalMessage = document.createElement('div');
+                botFinalMessage.classList.add('bot-message');
+                botFinalMessage.textContent = "Thank you for chatting! Keep up your skincare routine!";
+                chatOutput.appendChild(botFinalMessage);
+            }
+
+            chatbox.scrollTop = chatbox.scrollHeight;
+        }
+
+        // Start by asking the first question
+        askQuestion();
+    </script>
+</body>
+</html>

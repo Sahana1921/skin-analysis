@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Analysis</title>
+    <link rel="stylesheet">
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f7f8fc;
+    color: #333;
+}
+
+.container {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #b1cae1;
+    border-radius: 10px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+h1 {
+    font-size: 2.5rem;
+    color: #0c0c0c;
+    margin-bottom: 20px;
+}
+
+p {
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #777;
+}
+
+.input-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+label {
+    font-size: 1rem;
+    color: #555;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f9f9fa;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+select:focus {
+    border-color: #8a8e92;
+    outline: none;
+}
+
+button {
+    background-color: #598e49;
+    color: #fff;
+    border: none;
+    padding: 15px 30px;
+    font-size: 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #369411;
+}
+
+.result {
+    margin-top: 30px;
+    text-align: center;
+    background-color: #f0f4f8;
+    padding: 20px;
+    border-radius: 8px;
+    border: 2px solid #e6ecf3;
+}
+
+.hidden {
+    display: none;
+}
+
+h2 {
+    font-size: 1.5rem;
+    color: #121213;
+}
+              
+    </style>
+</head>
+<body>
+    <style>
+        body {
+        background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQSUnc9yXvtBU0rfeIbdVjaTms9PNE9nHep1g&s");
+        background-size: cover;
+       }
+        </style>
+    <div class="container">
+        <h1>Eco Skin Analyzer </h1>
+        <p>Analyze your skin based on the environment you're in.</p>
+        
+        <form id="skin-form">
+            <div class="input-group">
+                <label for="humidity">Humidity Level</label>
+                <select id="humidity" name="humidity">
+                    <option value="" disabled selected>Select humidity</option>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="temperature">Temperature</label>
+                <select id="temperature" name="temperature">
+                    <option value="" disabled selected>Select temperature</option>
+                    <option value="cold">Cold</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="hot">Hot</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="sun-exposure">Sun Exposure</label>
+                <select id="sun-exposure" name="sun-exposure">
+                    <option value="" disabled selected>Select sun exposure</option>
+                    <option value="low">Low</option>
+                    <option value="moderate">Moderate</option>
+                    <option value="high">High</option>
+                </select>
+            </div>
+
+            <button type="submit">Analyze</button>
+        </form>
+
+        <div id="result" class="result hidden">
+            <h2>Result:</h2>
+            <p id="analysis"></p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById("skin-form").addEventListener("submit", function(event) {
+    event.preventDefault();
+    const humidity = document.getElementById("humidity").value;
+    const temperature = document.getElementById("temperature").value;
+    const sunExposure = document.getElementById("sun-exposure").value;
+
+    let analysis = "";
+
+    if (humidity && temperature && sunExposure) {
+        if (humidity === "low" && temperature === "cold") {
+            analysis = "Your skin may feel dry. Consider moisturizing regularly.";
+        } else if (humidity === "high" && temperature === "hot") {
+            analysis = "Your skin might get oily.Use a gentle moisteurizer";
+        } else {
+            analysis = "Your skin condition is balanced based on the selected conditions.";
+        }
+
+        document.getElementById("result").classList.remove("hidden");
+        document.getElementById("analysis").innerText = analysis;
+    } else {
+        alert("Please fill out all fields.");
+    }
+});
+    </script>
+</body>
+</html>

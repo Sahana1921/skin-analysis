@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Type Analyzer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f0f4f8;
+            color: #333;
+            background-image: url("https://images.pexels.com/photos/4041392/pexels-photo-4041392.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500");
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #e8acdb;
+            border-radius: 10px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ea587a;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            font-size: 1rem;
+            color: #555;
+        }
+
+        select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 8px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: #f1f3f5;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        select:focus {
+            border-color: #f35be9;
+            outline: none;
+        }
+
+        button {
+            background-color: #de2387;
+            color: #fff;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #f36fea;
+        }
+
+        .result {
+            margin-top: 30px;
+            background-color: #f9fbfc;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #e6ecf3;
+        }
+
+        h2, h3 {
+            color: #f4a7d0;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Skin Type Analyzer</h1>
+        <p>Discover your skin type and get personalized skincare tips.</p>
+
+        <form id="skin-type-form">
+            <div class="input-group">
+                <label for="oiliness">What texture is your skin?</label>
+                <select id="oiliness" name="oiliness" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="very-oily">Very Oily</option>
+                    <option value="moderate-oily">Moderately Oily</option>
+                    <option value="normal">Normal</option>
+                    <option value="dry">Dry</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="sensitivity">How sensitive is your skin?</label>
+                <select id="sensitivity" name="sensitivity" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="very-sensitive">Very Sensitive</option>
+                    <option value="moderately-sensitive">Moderately Sensitive</option>
+                    <option value="not-sensitive">Not Sensitive</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label for="hydration">How hydrated is your skin?</label>
+                <select id="hydration" name="hydration" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option value="well-hydrated">Well Hydrated</option>
+                    <option value="normal-hydration">Normal Hydration</option>
+                    <option value="dry-hydration">Feels Dry</option>
+                </select>
+            </div>
+
+            <button type="submit">Analyze Skin Type</button>
+        </form>
+
+        <div id="result" class="result hidden">
+            <h2>Your Skin Type</h2>
+            <p id="skin-analysis"></p>
+            <h3>Suggestions:</h3>
+            <p id="skin-suggestions"></p>
+        </div>
+    </div>
+
+    <!-- Inline JavaScript -->
+    <script>
+        document.getElementById('skin-type-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const oiliness = document.getElementById('oiliness').value;
+            const sensitivity = document.getElementById('sensitivity').value;
+            const hydration = document.getElementById('hydration').value;
+
+            let skinType = '';
+            let suggestions = '';
+
+            if (oiliness === 'very-oily' && sensitivity === 'not-sensitive' && hydration === 'well-hydrated') {
+                skinType = 'Oily Skin';
+                suggestions = 'Use oil-free products and clay masks. Cleanse regularly to avoid clogged pores.';
+            } else if (oiliness === 'dry' && hydration === 'dry-hydration') {
+                skinType = 'Dry Skin';
+                suggestions = 'Use gentle, hydrating cleansers and moisturizers. Avoid hot water and alcohol-based products.';
+            } else if (oiliness === 'normal' && sensitivity === 'not-sensitive') {
+                skinType = 'Normal Skin';
+                suggestions = 'Maintain with a balanced routine. Use gentle cleansers and lightweight moisturizers.';
+            } else if (sensitivity === 'very-sensitive') {
+                skinType = 'Sensitive Skin';
+                suggestions = 'Use fragrance-free and hypoallergenic products. Avoid harsh ingredients like alcohol and acids.';
+            } else {
+                skinType = 'Combination Skin';
+                suggestions = 'Focus on balancing products. Use different care for oily and dry zones.';
+            }
+
+            document.getElementById('skin-analysis').textContent = skinType;
+            document.getElementById('skin-suggestions').textContent = suggestions;
+            document.getElementById('result').classList.remove('hidden');
+        });
+    </script>
+</body>
+</html>

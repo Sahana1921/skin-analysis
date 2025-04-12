@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.contact-us {
+    background-image: url('https://i.pinimg.com/564x/f9/02/14/f902145b76f948af4b7d92b5142607d6.jpg'); /* Replace with your background image URL */
+    background-size: cover;
+    background-position: center;
+    height: 110vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.contact-content {
+    background-color: rgba(164, 144, 144, 0.629); /* Transparent black overlay */
+    padding: 40px;
+    border-radius: 10px;
+    color: rgb(2, 0, 0);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+.contact-content h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+}
+
+.contact-content p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    text-align: left;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-group input, 
+.form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #ff6699;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+}
+
+button:hover {
+    background-color: #ff3366;
+}
+
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us - Skincare</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <section class="contact-us">
+        <div class="contact-content">
+            <h1>Contact Us</h1>
+            <p>We would love to hear from you! Reach out to us with any questions, feedback, or inquiries.</p>
+            <form action="#" method="post">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" onclick="window.location.href='file:///C:/Users/anant/OneDrive/Desktop/thank%20you%20.html'">Send Message</button>
+            </form>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Condition Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url("https://c1.wallpaperflare.com/preview/332/555/799/cosmetic-skincare-female-natural.jpg");
+            background-size: cover;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        .analysis-box {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 10px;
+            border: 1px solid #ddd;
+        }
+        canvas {
+            margin-top: 20px;
+            border-radius: 10px;
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Skin Condition Detector</h2>
+        <input type="file" id="imageUpload" accept="image/*">
+        <canvas id="canvas" width="400" height="400"></canvas>
+        <div class="analysis-box" id="result"></div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById("canvas");
+        const ctx = canvas.getContext("2d");
+        const result = document.getElementById("result");
+        const imageUpload = document.getElementById("imageUpload");
+
+        imageUpload.addEventListener("change", function (e) {
+            const file = e.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function (event) {
+                const img = new Image();
+                img.onload = function () {
+                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                    detectSkinConditions();
+                };
+                img.src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function detectSkinConditions() {
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            const data = imageData.data;
+            let darkSpots = 0;
+            let redAreas = 0;
+            let darkCircles = 0;
+
+            for (let i = 0; i < data.length; i += 4) {
+                const r = data[i];
+                const g = data[i + 1];
+                const b = data[i + 2];
+                const brightness = (r + g + b) / 3;
+
+                if (r > 100 && g < 80 && b < 80) redAreas++; 
+                if (brightness < 60) darkSpots++; 
+                if (brightness < 40 && g > 20 && b > 20) darkCircles++; 
+            }
+
+            result.innerHTML = `<h3>Analysis Results</h3>
+                <p><strong>Dark Spots:</strong> ${darkSpots}</p>
+                <p><strong>Red Areas (Acne/Pimples):</strong> ${redAreas}</p>
+                <p><strong>Dark Circles:</strong> ${darkCircles}</p>`;
+        }
+    </script>
+</body>
+</html>
+

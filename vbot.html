@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Skincare Chatbot</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-image: url("https://i.pinimg.com/564x/73/e5/95/73e5954db822e08fa1edf4254e4e607b.jpg");
+      background-size: cover;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      flex-direction: column;
+    }
+
+    .chatbox {
+      width: 90%;
+      max-width: 320px;
+      height: 400px;
+      background-color: rgba(255, 255, 255, 0.95);
+      border: 4px solid #91be15;
+      border-radius: 12px;
+      padding: 15px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 10px;
+    }
+
+    .user-message, .bot-message {
+      max-width: 80%;
+      margin: 5px;
+      padding: 10px;
+      border-radius: 10px;
+      display: inline-block;
+    }
+
+    .user-message {
+      background-color: #d4f1f4;
+      align-self: flex-end;
+    }
+
+    .bot-message {
+      background-color: #f1f1f1;
+      align-self: flex-start;
+    }
+
+    .button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .button:hover {
+      background-color: #45a049;
+    }
+  </style>
+</head>
+<body>
+  <div class="chatbox" id="chatbox">
+    <div id="chat-output"></div>
+  </div>
+  <button class="button" onclick="startVoiceRecognition()">Start Voice Chat</button>
+
+  <script>
+    // Check browser support
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+
+    if (!SpeechRecognition) {
+      alert("Sorry baby, your browser doesn't support voice recognition 😢 Please use Chrome.");
+    } else {
+      const recognition = new SpeechRecognition();
+      recognition.lang = 'en-US';
+      recognition.interimResults = false;
+
+      function generateResponse(input) {
+        input = input.toLowerCase();
+        if (input.includes("dry skin")) return "Use moisturizers with hyaluronic acid and ceramides!";
+if (input.includes("oily skin")) return "Use oil-free, non-comedogenic products.";
+if (input.includes("acne")) return "Try products with salicylic acid or benzoyl peroxide.";
+if (input.includes("hello") || input.includes("hi")) return "Hi sweetie! How can I help with your skincare?";
+if (input.includes("sensitive skin")) return "Use fragrance-free, gentle products.";
+if (input.includes("dark spots")) return "Try Vitamin C or niacinamide!";
+if (input.includes("sunscreen")) return "Sunscreen is essential! Do you prefer mineral or chemical?";
+if (input.includes("best moisturizer")) return "A great option is one with ceramides, glycerin, and hyaluronic acid!";
+if (input.includes("anti-aging")) return "Try retinol, peptides, and antioxidants like Vitamin C!";
+if (input.includes("puffy eyes")) return "Caffeine eye creams can help reduce puffiness!";
+if (input.includes("skincare routine")) return "Start with cleanser, toner, serum, moisturizer, and sunscreen in the morning!";
+if (input.includes("dark circles")) return "Use eye creams with Vitamin C, caffeine, or retinol!";
+if (input.includes("exfoliation")) return "Use AHA/BHA exfoliants 2-3 times a week for smooth skin!";
+if (input.includes("best cleanser")) return "Look for a gentle, sulfate-free cleanser suitable for your skin type!";
+if (input.includes("blackheads")) return "Salicylic acid or clay masks can help clear blackheads!";
+if (input.includes("open pores")) return "Use niacinamide and clay masks to minimize the appearance of pores!";
+if (input.includes("makeup remover")) return "Oil-based or micellar water removers are great for taking off makeup!";
+if (input.includes("hydration")) return "Drink plenty of water and use hydrating serums with hyaluronic acid!";
+if (input.includes("night cream")) return "Try a night cream with peptides and ceramides for overnight repair!";
+if (input.includes("lip care")) return "Use a hydrating lip balm with SPF to keep your lips soft!";
+if (input.includes("glowing skin")) return "Exfoliate, hydrate, and use Vitamin C for a natural glow!";
+if (input.includes("best face mask")) return "Clay masks for oily skin, hydrating masks for dry skin, and soothing masks for sensitive skin!";
+if (input.includes("redness")) return "Look for calming ingredients like centella asiatica and aloe vera!";
+if (input.includes("toner")) return "Hydrating toners for dry skin, exfoliating toners for oily skin!";
+if (input.includes("serum")) return "Vitamin C for brightening, hyaluronic acid for hydration, retinol for anti-aging!";
+if (input.includes("DIY skincare")) return "Try honey masks for hydration or aloe vera for soothing skin!";
+if (input.includes("double cleansing")) return "Start with an oil-based cleanser, then use a gentle foaming cleanser!";
+if (input.includes("best sunscreen")) return "SPF 30+ with broad-spectrum protection is a must!";
+if (input.includes("self-care")) return "Skincare is self-care! Take time to pamper yourself!";
+if (input.includes("skincare tips")) return "Hydrate, protect with SPF, and be consistent with your routine!";
+if (input.includes("wrinkles")) return "Retinol, peptides, and hydration can help reduce fine lines!";
+if (input.includes("skin barrier")) return "Use ceramides, niacinamide, and avoid over-exfoliating!";
+if (input.includes("clogged pores")) return "Exfoliate gently with BHA and keep your skin clean!";
+if (input.includes("best vitamin C")) return "Look for stable forms like ascorbic acid or sodium ascorbyl phosphate!";
+if (input.includes("body skincare")) return "Don’t forget to exfoliate and moisturize your body too!";
+if (input.includes("how to layer skincare")) return "Apply from thinnest to thickest: cleanser → toner → serum → moisturizer → SPF!";
+if (input.includes("dehydrated skin")) return "Use hydrating serums with hyaluronic acid and drink more water!";
+if (input.includes("sensitive to fragrance")) return "Stick to fragrance-free products to avoid irritation!";
+if (input.includes("best facial oil")) return "Jojoba oil for balanced hydration, rosehip oil for anti-aging!";
+if (input.includes("what is retinol")) return "Retinol is a Vitamin A derivative that helps with aging and acne!";
+if (input.includes("can I use retinol daily")) return "Start 2-3 times a week and build up as your skin tolerates!";
+if (input.includes("best face wash")) return "Choose a gentle cleanser that suits your skin type!";
+if (input.includes("best eye cream")) return "Look for peptides, caffeine, and Vitamin C for brighter under eyes!";
+if (input.includes("SPF before or after makeup")) return "Apply SPF before makeup for proper sun protection!";
+if (input.includes("how to reapply sunscreen")) return "Use a spray SPF or powder SPF over makeup for easy reapplication!";
+if (input.includes("Korean skincare")) return "K-beauty focuses on hydration, layering, and gentle ingredients!";
+if (input.includes("face mist")) return "Hydrating face mists refresh skin throughout the day!";
+if (input.includes("how to get rid of dull skin")) return "Exfoliate, use brightening serums, and hydrate properly!";
+if (input.includes("what is niacinamide")) return "Niacinamide helps with oil control, redness, and skin barrier repair!";
+if (input.includes("how to deal with maskne")) return "Use gentle cleansers, non-comedogenic moisturizers, and avoid touching your face!";
+if (input.includes("best drugstore skincare")) return "CeraVe, The Ordinary, and La Roche-Posay have great affordable options!";
+if (input.includes("how to fade acne scars")) return "Use Vitamin C, retinol, and sunscreen daily!";
+if (input.includes("is toner necessary")) return "Toner is optional, but can help hydrate or exfoliate!";
+if (input.includes("skincare for teenagers")) return "Stick to gentle cleansers, moisturizers, and SPF!";
+if (input.includes("what is slugging")) return "Slugging is sealing in moisture with petroleum jelly at night!";
+if (input.includes("do I need a night cream")) return "A night cream helps repair and nourish your skin while you sleep!";
+if (input.includes("what causes breakouts")) return "Stress, diet, hormones, and using the wrong products can all contribute!";
+if (input.includes("why is SPF important")) return "SPF protects against premature aging, dark spots, and skin cancer!";
+if (input.includes("how to remove makeup properly")) return "Use an oil-based cleanser first, then follow up with a water-based cleanser!";
+if (input.includes("what is dermaplaning")) return "Dermaplaning exfoliates the skin and removes peach fuzz for a smoother texture!";
+if (input.includes("how to calm irritated skin")) return "Use aloe vera, centella asiatica, or oatmeal-based products!";
+if (input.includes("what is micellar water")) return "Micellar water is a gentle cleanser that removes dirt, oil, and makeup without rinsing!";
+if (input.includes("how to use a jade roller")) return "Use upward strokes to massage your face and improve circulation!";
+if (input.includes("why is my skin so dry")) return "Cold weather, over-cleansing, and lack of hydration could be the cause!";
+if (input.includes("what is a sheet mask")) return "A sheet mask is a fabric mask soaked in serum for deep hydration and nourishment!";
+if (input.includes("thank you")) return "You're welcome sweetie!";
+return "I’m not sure about that, love! Can you tell me more about your skincare concerns? 💖";
+      }
+
+      function addChatMessage(message, isBot = false) {
+        const chatOutput = document.getElementById("chat-output");
+        const messageElement = document.createElement("div");
+        messageElement.textContent = message;
+        messageElement.className = isBot ? "bot-message" : "user-message";
+        chatOutput.appendChild(messageElement);
+        chatOutput.scrollTop = chatOutput.scrollHeight;
+      }
+
+      recognition.onresult = (event) => {
+        const userSpeech = event.results[0][0].transcript;
+        addChatMessage(userSpeech);
+        const response = generateResponse(userSpeech);
+        addChatMessage(response, true);
+
+        const speak = new SpeechSynthesisUtterance(response);
+        window.speechSynthesis.speak(speak);
+      };
+
+      recognition.onerror = () => {
+        addChatMessage("Sorry, I didn't catch that. Try again please.", true);
+      };
+
+      window.startVoiceRecognition = function () {
+        recognition.start();
+      };
+    }
+  </script>
+</body>
+</html>
